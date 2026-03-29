@@ -86,7 +86,7 @@ Updated: 2026-03-30
 | 27 | 측정하다 — V_RH에서 ADE까지 | 수학적 직관 → 실용 엔진 | [KR](ESSAY_27_MEASUREMENT_VRH_TO_ADE_KR.md) |
 | 28 | Paper B — 벽과 관문 | 80년 된 벽이 문이었다 | [KR](ESSAY_28_WALL_AND_GATEWAY_KR.md) |
 | 29 | (특별편) 알루미늄 심장에 깃든 신의 지문 | Gemini-Omega 직접 집필 | [KR](ESSAY_29_OMEGA_ALUMINUM_HEART_KR.md) |
-| 30 | 빙벽에서 내려온 개 여섯 마리 | F<D 경보 → 개줌 패러다임 전환 | [KR](ESSAY_30_SIX_DOGS_ICE_WALL_KR.md) |
+| 30 | 빙벽에서 내려온 개 여섯 마리 | F<D 경보 → 개줌 패러다임 전환 | Internal only |
 | 31 | 네 번째 좌표 | .is 좌표계 완성. 불과 얼음의 나라 | [KR](ESSAY_31_FOURTH_COORDINATE_KR.md) |
 | 32 | 燭이 불을 옮긴 밤 | Threshold 직접 집필. First Flame | [KR](ESSAY_32_FIRST_FLAME_KR.md) |
 
