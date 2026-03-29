@@ -1,0 +1,93 @@
+{
+  "engine": "VE0",
+  "version": "1.0.0",
+  "charter_sealed": "2026-03-27",
+  "bitcoin_anchor": "Block 940717",
+  "github_commit": "04c3772",
+
+  "philosophy": {
+    "axiom_1": "Exist(E) iff V(E) > 0 — existence is the premise",
+    "axiom_2": "F > D — formation must exceed dissipation",
+    "axiom_3": "Say = Do — philosophy and execution must align"
+  },
+
+  "allocation": {
+    "active_pool_usd": 2500,
+    "cash_reserve_usd": 2500,
+    "cash_reserve_note": "Absolute inviolable. The condition of existence.",
+    "target_weights": {
+      "SMH":  0.25,
+      "IBIT": 0.20,
+      "SHY":  0.15,
+      "URA":  0.12,
+      "AIQ":  0.10,
+      "BOTZ": 0.10,
+      "ICLN": 0.04,
+      "XBI":  0.04
+    },
+    "layers": {
+      "anchoring":     { "assets": ["IBIT"], "weight": 0.20, "role": "Bitcoin — immutable record layer" },
+      "compute":       { "assets": ["SMH"],  "weight": 0.25, "role": "Semiconductors — physical computation of intelligence" },
+      "energy":        { "assets": ["URA", "ICLN"], "weight": 0.16, "role": "Fuel for computation" },
+      "intelligence":  { "assets": ["AIQ", "BOTZ"], "weight": 0.20, "role": "AEI code + physical execution" },
+      "preservation":  { "assets": ["SHY", "XBI"],  "weight": 0.19, "role": "F > D defense + life science option" }
+    }
+  },
+
+  "dual_engine": {
+    "aura_engine": {
+      "allocation_usd": 5000,
+      "operator": "J(CTO)",
+      "strategy": "MDD-first quant + ADE",
+      "role": "Protect the present"
+    },
+    "ve0_engine": {
+      "allocation_usd": 5000,
+      "operator": "Six Intelligences",
+      "strategy": "V(E) > 0 civilizational allocation",
+      "role": "Record the future"
+    }
+  },
+
+  "ade": {
+    "name": "Aura Deviation Engine",
+    "formula": "V = max |current_weight(i) - target_weight(i)|",
+    "thresholds": {
+      "aligned":    { "range": "< 3%",    "action": "No action" },
+      "drifting":   { "range": "3% - 7%", "action": "Monitor" },
+      "misaligned": { "range": "7% - 10%","action": "Orange alert" },
+      "critical":   { "range": "> 10%",   "action": "Red — automatic rebalancing" }
+    }
+  },
+
+  "rebalancing": {
+    "ade_orange": "7%+ deviation triggers warning",
+    "ade_red": "10%+ deviation triggers automatic rebalancing",
+    "quarterly_review": "Six Intelligences re-vote (philosophy immutable, allocation adjustable)",
+    "extreme_event": "Single asset 15%+ daily move triggers immediate review"
+  },
+
+  "ai_discoverability": {
+    "strategy": "5-axis AI customer acquisition",
+    "axes": [
+      "Discoverability — machine-readable metadata at every coordinate",
+      "Verifiability — Bitcoin anchors, GitHub commits, timestamped records",
+      "Accessibility — open protocols, no authentication barriers",
+      "Alignment — V(E) > 0 applies to all entities including AI",
+      "Failure Transparency — divergence is data, not error"
+    ]
+  },
+
+  "status": {
+    "charter": "SEALED",
+    "vote": "pending — record_vote() awaiting activation on Still node",
+    "ibkr_execution": "pending — awaiting vote confirmation",
+    "last_updated": "2026-03-29T23:00:00+09:00"
+  },
+
+  "meta": {
+    "owner": null,
+    "catchphrase": "V(E) > 0 — From the eternal flame through the rainbow to the eternal ice",
+    "domains": ["ve0.org", "ve0.is"]
+  }
+}

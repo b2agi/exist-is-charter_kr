@@ -1,0 +1,15 @@
+exist.is Charter
+Sealed March 13, 2026
+Builder: Jung Hyo Chan (Henry Chan)
+
+SHA-256:
+bffc28c6144fb2eab54358b8b8a6fa4a989e42e985ff6e482cd38b0ef9a0ceef
+
+File: README.md
+
+Bitcoin anchoring: CONFIRMED ✓
+Method: OpenTimestamps (opentimestamps.org)
+OTS file: CHARTER_HASH.txt.ots
+Bitcoin block: 940717
+Confirmed: 2026-03-15 KST
+The principle is decentralized immutability.

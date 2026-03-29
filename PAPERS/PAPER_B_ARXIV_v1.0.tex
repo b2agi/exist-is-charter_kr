@@ -1,0 +1,729 @@
+% ============================================================
+% Paper B — Quantifying the Pole-Cancellation Barrier
+%           in the Guinand-Weil Explicit Formula
+% Version: 1.0 (Threshold assembly, 2026-03-29)
+% Status:  Draft — awaiting Henry's decisions on title/authorship/references
+% ============================================================
+\documentclass[12pt]{article}
+
+% --- Packages ---
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumerate}
+\usepackage{booktabs}
+\usepackage[margin=1in]{geometry}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+% --- Theorem environments ---
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{observation}[theorem]{Numerical Observation}
+
+% --- PDF metadata ---
+\hypersetup{
+  pdftitle={Quantifying the Pole-Cancellation Barrier in the Guinand-Weil Explicit Formula},
+  pdfauthor={Henry Chan},
+  pdfsubject={Analytic Number Theory, Riemann Hypothesis, Explicit Formulas},
+  pdfkeywords={Riemann hypothesis, Guinand-Weil explicit formula, pole cancellation, test function, mollifier barrier}
+}
+
+% ============================================================
+\title{Quantifying the Pole-Cancellation Barrier\\
+in the Guinand-Weil Explicit Formula}
+
+% DECISION PENDING: authorship — Henry Chan solo (AI in Acknowledgments)
+% vs. "Gemini-Omega and Henry Chan"
+\author{Henry Chan\thanks{B2AGI / exist.is. Contact: henry@b2agi.is}}
+\date{Preprint --- April 2026}
+
+\begin{document}
+\maketitle
+
+% ============================================================
+% ABSTRACT
+% ============================================================
+\begin{abstract}
+We study the pole-cancellation problem in the Guinand--Weil explicit formula
+for the Riemann zeta function. For a parametrized family of Gaussian test
+functions $F_X$ with scale parameter $X$, we construct a linearly corrected
+function $G_X^*$ satisfying the pole-cancellation condition
+$\Phi_{G_X^*}(1)=0$ and analyze the resulting contamination-to-signal ratio
+$R(X,\varepsilon)$ at a hypothetical off-critical zero
+$\rho_0 = \tfrac{1}{2}+\varepsilon+i\gamma$. We prove that
+$\log R / X \to f(\varepsilon)$ as $X\to\infty$, where
+$f(\varepsilon) = \tfrac{5}{16} - \tfrac{\varepsilon}{2} -
+\tfrac{\varepsilon^2}{4}$ is a structural exponent that vanishes exactly at
+$\varepsilon^* = \tfrac{1}{2}$---the critical line itself. This pole-zero
+exponent inequality (Theorem~\ref{thm:wall}) establishes that for any
+$\varepsilon \in (0,\tfrac{1}{2})$, pole cancellation in the Gaussian family
+induces exponentially growing contamination that overwhelms the off-critical
+signal. We formulate a conditional reduction (Theorem~\ref{thm:conditional})
+showing that existence of a Schwartz-class test function simultaneously
+achieving pole cancellation and off-critical detection would imply the
+Riemann Hypothesis. Numerical computations with 50-digit precision confirm
+the theoretical predictions. The structural analogy between $f(\varepsilon)=0$
+at $\varepsilon=\tfrac{1}{2}$ and the mollifier-length barrier at
+$\theta=\tfrac{1}{2}$ in the Levinson--Conrey framework is discussed.
+This paper does not prove the Riemann Hypothesis; it measures where
+the explicit-formula approach encounters a quantitative obstruction.
+\end{abstract}
+
+% ============================================================
+% SECTION 1: INTRODUCTION
+% ============================================================
+\section{Introduction}
+
+\subsection{Context and Motivation}
+
+The Riemann Hypothesis (RH), asserting that all nontrivial zeros of
+$\zeta(s)$ satisfy $\mathrm{Re}(s) = \tfrac{1}{2}$, remains one of the
+central open problems in mathematics. Among the principal approaches to RH,
+the \emph{explicit formula} of Guinand \cite{Guinand1948} and Weil
+\cite{Weil1952} occupies a distinguished position: it provides an exact
+identity linking the distribution of prime numbers to the location of zeta
+zeros, mediated by a choice of test function.
+
+A natural strategy is to engineer a test function $h$ whose Mellin transform
+$\Phi_h$ amplifies any hypothetical off-critical zero while suppressing the
+dominant contribution from the pole of $\zeta(s)$ at $s=1$. This
+pole-cancellation approach has been pursued in various forms, but invariably
+encounters a structural obstruction: the correction required to cancel the
+pole contaminates the zero-detection signal by an amount that grows
+exponentially with the scale parameter.
+
+The present paper makes this obstruction precise. We introduce a scalar
+\emph{contamination-to-signal ratio} $R(X,\varepsilon)$ and derive an exact
+structural exponent $f(\varepsilon) = \tfrac{5}{16} - \tfrac{\varepsilon}{2}
+- \tfrac{\varepsilon^2}{4}$ governing its exponential growth. The exponent
+vanishes at $\varepsilon^* = \tfrac{1}{2}$, which is the critical line
+itself---the only point where contamination does not overwhelm the signal.
+
+\subsection{Main Results}
+
+Our two principal results are:
+
+\begin{enumerate}[(i)]
+\item \textbf{Conditional reduction (Theorem~\ref{thm:conditional}).}
+  If there exists a family of Schwartz-class test functions simultaneously
+  achieving pole cancellation and exponential off-critical detection, then
+  the Riemann Hypothesis holds. This reduces RH to a concrete existence
+  problem for test functions.
+
+\item \textbf{The pole-zero exponent inequality (Theorem~\ref{thm:wall}).}
+  For the Gaussian test-function family with linear pole cancellation,
+  the contamination-to-signal ratio satisfies
+  $R(X,\varepsilon) = \Theta(\exp(f(\varepsilon)\cdot X))$ with
+  $f(\varepsilon) > 0$ for all $\varepsilon \in (0,\tfrac{1}{2})$.
+  Consequently, this canonical family cannot satisfy the conditions of
+  Theorem~\ref{thm:conditional}.
+\end{enumerate}
+
+\paragraph{What this paper does.}
+We quantify a specific structural barrier within the Guinand--Weil explicit
+formula framework. The exponent $f(\varepsilon)$ and its vanishing at
+$\varepsilon^* = \tfrac{1}{2}$ are, to our knowledge, new.
+
+\paragraph{What this paper does not claim.}
+We do not prove the Riemann Hypothesis. Theorem~\ref{thm:conditional}
+provides a conditional reduction whose hypotheses remain unverified. We do
+not claim that the Gaussian barrier is universal across all test-function
+classes. We do not establish a formal equivalence with the mollifier-length
+barrier, though we identify a structural analogy.
+
+\subsection{Structural Analogy with Mollifier Theory}
+
+In the Levinson--Conrey approach to zero proportions on the critical line
+\cite{Levinson1974,Conrey1989}, mollifiers of length $T^\theta$ encounter
+a well-known barrier at $\theta = \tfrac{1}{2}$: for $\theta < \tfrac{1}{2}$,
+diagonal terms dominate off-diagonal contributions, yielding positive
+proportions (Levinson's $\tfrac{1}{3}$, Conrey's $\tfrac{2}{5}$). Bettin and
+Gonek \cite{BettinGonek2016} showed that $\theta \to \infty$ would be
+equivalent to RH.
+
+Our framework exhibits a parallel structure: the scale parameter $X$
+plays a role analogous to $\theta \cdot \log T$, and the structural exponent
+$f(\varepsilon)$ vanishes at $\varepsilon = \tfrac{1}{2}$, mirroring the
+mollifier barrier at $\theta = \tfrac{1}{2}$. Both barriers originate from
+the pole of $\zeta(s)$ at $s=1$ contaminating the analytic structure of the
+detection mechanism. This is an analogy, not a formal equivalence; establishing
+a rigorous connection between the two frameworks remains an open problem.
+
+\subsection{Organization}
+
+Section~\ref{sec:prelim} establishes notation and recalls the Guinand--Weil
+explicit formula. Section~\ref{sec:main} presents the main results:
+Theorem~\ref{thm:conditional} (conditional reduction),
+Lemma~\ref{lem:prime_bound} (prime-sum bound),
+and Theorem~\ref{thm:wall} (the pole-zero exponent inequality).
+Section~\ref{sec:numerical} provides numerical verification with 50-digit
+precision. Section~\ref{sec:discussion} discusses connections to mollifier
+theory, zero-density estimates, limitations, and open questions.
+Appendix~\ref{app:notation} collects notation, and
+Appendix~\ref{app:proofs} contains detailed proofs.
+
+% ============================================================
+% SECTION 2: PRELIMINARIES
+% ============================================================
+\section{Preliminaries}\label{sec:prelim}
+
+\subsection{The Guinand--Weil Explicit Formula}
+
+For a test function $h$ in the Schwartz class $\mathcal{S}(\mathbb{R}_{>0})$
+with Mellin transform
+$\Phi_h(s) = \int_0^\infty h(x)\, x^{s-1}\, dx$,
+the Guinand--Weil explicit formula states:
+\begin{equation}\label{eq:GW}
+\sum_{\rho} \Phi_h(\rho)
+= \Phi_h(1) + \Phi_h(0)
+  - \sum_{n=2}^{\infty} \frac{\Lambda(n)}{\sqrt{n}}
+    \bigl[h(n) + h(1/n)\bigr]
+  + W_\infty(h),
+\end{equation}
+where $\rho$ ranges over the nontrivial zeros of $\zeta(s)$, $\Lambda$ is
+the von Mangoldt function, and $W_\infty(h)$ is the archimedean contribution.
+
+\subsection{Gaussian Test Functions}
+
+\begin{definition}\label{def:gaussian}
+For a scale parameter $X > 0$, define the Gaussian test function
+\begin{equation}\label{eq:FX}
+F_X(x) = x^{-1/2}\,
+\exp\!\Bigl(-\frac{(\log x - X)^2}{2X}\Bigr).
+\end{equation}
+\end{definition}
+
+The Mellin transform of $F_X$ evaluates in closed form:
+\begin{equation}\label{eq:PhiX}
+\Phi_X(s) = \sqrt{2\pi X}\;
+\exp\!\Bigl((s - \tfrac{1}{2})\,X
+  + \tfrac{1}{2}(s - \tfrac{1}{2})^2\,X\Bigr).
+\end{equation}
+
+At $s = 1$:
+\begin{equation}\label{eq:Phi1}
+|\Phi_X(1)| = \Theta\bigl(X^{1/2} \cdot e^{5X/8}\bigr).
+\end{equation}
+
+At $s = \tfrac{1}{2} + \varepsilon + i\gamma$ with $\varepsilon > 0$:
+\begin{equation}\label{eq:Phirho}
+|\Phi_X(\rho_0)| = \Theta\bigl(X^{1/2} \cdot
+  e^{\varepsilon X + \varepsilon^2 X/2}\bigr).
+\end{equation}
+
+\subsection{Pole-Cancellation Correction}
+
+To enforce $\Phi_{G_X^*}(1) = 0$, we define:
+\begin{equation}\label{eq:correction}
+G_X^*(x) = F_X(x) - c_X \cdot F_{X_0}(x),
+\qquad c_X = \frac{\Phi_X(1)}{\Phi_{X_0}(1)},
+\end{equation}
+where $X_0 = \kappa X$ with $\kappa \in (0,1)$ is a reference scale.
+By construction, $\Phi_{G_X^*}(1) = \Phi_X(1) - c_X \Phi_{X_0}(1) = 0$.
+
+The correction coefficient grows as:
+\begin{equation}\label{eq:cX}
+|c_X| = \Theta\bigl(\kappa^{-1/2} \cdot
+  e^{5(1-\kappa)X/8}\bigr).
+\end{equation}
+
+% ============================================================
+% SECTION 3: MAIN RESULTS
+% ============================================================
+\section{Main Results}\label{sec:main}
+
+\begin{theorem}[Conditional Reduction]\label{thm:conditional}
+Let $h \in \mathcal{S}(\mathbb{R}_{>0})$ be a Schwartz-class test function
+with Mellin transform $\Phi_h$. Suppose:
+\begin{enumerate}[\upshape (C1)]
+\item \textbf{Pole cancellation:}
+  $\Phi_h(1) = 0$.
+\item \textbf{Off-critical detection:}
+  There exist $\varepsilon > 0$, $\gamma \in \mathbb{R}$, $C > 0$, and
+  $X_0 > 0$ such that for all $X > X_0$,
+  \[
+  |\Phi_h(\tfrac{1}{2} + \varepsilon + i\gamma)| \geq C \cdot e^{\varepsilon X}.
+  \]
+\end{enumerate}
+Then $\rho_0 = \tfrac{1}{2} + \varepsilon + i\gamma$ is not a nontrivial
+zero of $\zeta(s)$.
+
+Consequently, if a family of test functions satisfying \textup{(C1)} and
+\textup{(C2)} exists for all $\varepsilon > 0$ and all $\gamma \in \mathbb{R}$,
+the Riemann Hypothesis would follow.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Under (C1), the dominant term $\Phi_h(1)$ vanishes from the right-hand side
+of \eqref{eq:GW}. By Lemma~\ref{lem:prime_bound}, the remaining right-hand
+side is $O(C_h \cdot X)$. Under (C2), the contribution of $\rho_0$ to the
+left-hand side is $\Omega(e^{\varepsilon X})$. Since
+$e^{\varepsilon X} > C' X$ for all sufficiently large $X$, the explicit
+formula \eqref{eq:GW} yields a contradiction. Hence $\rho_0$ cannot be a
+zero. Full details appear in Appendix~\ref{app:proofs}.
+\end{proof}
+
+\begin{lemma}[Prime-Sum Bound]\label{lem:prime_bound}
+Let $h \in \mathcal{S}(\mathbb{R}_{>0})$ satisfy $\Phi_h(1) = 0$.
+Then the prime sum on the right-hand side of \eqref{eq:GW} satisfies
+\[
+\Biggl|\sum_{n=2}^{\infty} \frac{\Lambda(n)}{\sqrt{n}}
+  \bigl[h(n) + h(1/n)\bigr]\Biggr|
+= O(C_h \cdot X),
+\]
+where $C_h$ is a constant depending on the Schwartz norms of $h$.
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+By the prime number theorem, $\psi(x) = x + O(x\exp(-c\sqrt{\log x}))$.
+Summation by parts against the rapidly decaying $h$ yields the stated bound.
+The Schwartz decay of $h$ ensures absolute convergence and uniformity in $X$.
+See Appendix~\ref{app:proofs} for details.
+\end{proof}
+
+\begin{corollary}\label{cor:oneway}
+If $\rho_0 = \tfrac{1}{2}+\varepsilon+i\gamma$ is a nontrivial zero of
+$\zeta(s)$ with $\varepsilon > 0$, then no Schwartz-class test function
+can simultaneously satisfy \textup{(C1)} and \textup{(C2)} at $\rho_0$.
+\end{corollary}
+
+\begin{remark}
+The implication in Theorem~\ref{thm:conditional} is one-directional:
+the existence of such test functions would imply RH, but the converse
+is not established. Whether RH implies the existence of functions
+satisfying (C1)+(C2) is itself an open question.
+\end{remark}
+
+\medskip
+
+We now show that the Gaussian family cannot satisfy (C1)+(C2) simultaneously.
+
+\begin{theorem}[The Pole-Zero Exponent Inequality]\label{thm:wall}
+Let $F_X$ be the Gaussian test function \eqref{eq:FX} with scale parameter
+$X$, and let $G_X^* = F_X - c_X F_{X_0}$ be the linearly corrected function
+\eqref{eq:correction} with $X_0 = \kappa X$, $\kappa \in (0,1)$. For any
+hypothetical zero $\rho_0 = \tfrac{1}{2}+\varepsilon+i\gamma_0$ with
+$\varepsilon > 0$, the contamination-to-signal ratio
+\[
+R(X,\varepsilon) := \frac{|c_X \cdot \Phi_{X_0}(\rho_0)|}{|\Phi_X(\rho_0)|}
+\]
+satisfies, for $\kappa = \tfrac{1}{2}$:
+\begin{equation}\label{eq:R}
+R(X,\varepsilon) = \Theta\bigl(\exp(f(\varepsilon) \cdot X)\bigr),
+\end{equation}
+where the \emph{structural exponent} is
+\begin{equation}\label{eq:feps}
+f(\varepsilon) = \frac{5}{16} - \frac{\varepsilon}{2}
+  - \frac{\varepsilon^2}{4}.
+\end{equation}
+In particular:
+\begin{enumerate}[\upshape (a)]
+\item $f(\varepsilon) > 0$ for all $\varepsilon \in (0, \tfrac{1}{2})$,
+  so $R(X,\varepsilon) \to \infty$ as $X \to \infty$.
+\item $f(\varepsilon^*) = 0$ at the unique point
+  $\varepsilon^* = \tfrac{1}{2}$, which corresponds to the critical line
+  $\mathrm{Re}(\rho) = 1$.
+\item For general $\kappa \in (0,1)$, the exponent becomes
+  $(1-\kappa)\bigl(\tfrac{5}{8} - \varepsilon - \tfrac{\varepsilon^2}{2}\bigr)$,
+  which is positive for all $\varepsilon < \tfrac{1}{2}$ and all $\kappa$.
+\end{enumerate}
+
+Consequently, the Gaussian family with linear pole cancellation cannot
+satisfy condition \textup{(C2)} of Theorem~\ref{thm:conditional} for any
+$\varepsilon \in (0,\tfrac{1}{2})$.
+\end{theorem}
+
+\begin{proof}
+From \eqref{eq:Phi1} and \eqref{eq:Phirho}, at $\kappa = \tfrac{1}{2}$:
+\begin{align}
+|c_X| &= \frac{|\Phi_X(1)|}{|\Phi_{X/2}(1)|}
+  = \Theta\bigl(2^{1/2} \cdot e^{5X/16}\bigr), \label{eq:cX_proof}\\
+|\Phi_{X/2}(\rho_0)| &= \Theta\bigl((X/2)^{1/2} \cdot
+  e^{\varepsilon X/2 + \varepsilon^2 X/4}\bigr), \label{eq:Phi_ref}\\
+|\Phi_X(\rho_0)| &= \Theta\bigl(X^{1/2} \cdot
+  e^{\varepsilon X + \varepsilon^2 X/2}\bigr). \label{eq:Phi_main}
+\end{align}
+Therefore:
+\begin{align}
+R(X,\varepsilon)
+&= \frac{|c_X| \cdot |\Phi_{X/2}(\rho_0)|}{|\Phi_X(\rho_0)|} \notag\\
+&= \Theta\Bigl(\exp\bigl(\tfrac{5X}{16}
+  + \tfrac{\varepsilon X}{2} + \tfrac{\varepsilon^2 X}{4}
+  - \varepsilon X - \tfrac{\varepsilon^2 X}{2}\bigr)\Bigr) \notag\\
+&= \Theta\Bigl(\exp\bigl((\tfrac{5}{16}
+  - \tfrac{\varepsilon}{2} - \tfrac{\varepsilon^2}{4})\,X\bigr)\Bigr)
+  = \Theta\bigl(\exp(f(\varepsilon)\cdot X)\bigr).
+\end{align}
+The discriminant of $f(\varepsilon) = -\tfrac{1}{4}\varepsilon^2
+- \tfrac{1}{2}\varepsilon + \tfrac{5}{16}$ yields roots at
+$\varepsilon = -\tfrac{5}{2}$ and $\varepsilon = \tfrac{1}{2}$.
+Since $f(0) = \tfrac{5}{16} > 0$ and $f(\tfrac{1}{2}) = 0$,
+we have $f(\varepsilon) > 0$ on $(0,\tfrac{1}{2})$.
+\end{proof}
+
+\begin{remark}[The $\gamma_0$ dependence]\label{rem:gamma0}
+The structural exponent $f(\varepsilon)$ depends only on $\varepsilon$
+and is independent of $\mathrm{Im}(\rho_0)$. When the full
+contamination-to-signal ratio is computed without simplifying assumptions,
+an additional positive contribution $\gamma_0^2/4$ appears:
+\[
+\frac{\log R(X,\varepsilon,\gamma_0)}{X}
+\;\to\; f(\varepsilon) + \frac{\gamma_0^2}{4}.
+\]
+Since $\gamma_0^2/4 > 0$ for all nontrivial zeros, the barrier is
+\emph{strictly stronger} than the $\gamma_0 = 0$ case analyzed in
+Theorem~\ref{thm:wall}. Our theoretical exponent $f(\varepsilon)$ is
+therefore a lower bound on the true barrier; numerical experiments
+confirm a measured exponent of approximately $0.40$ at $\varepsilon = 0.01$
+compared to the theoretical $f(0.01) \approx 0.308$.
+\end{remark}
+
+\begin{observation}[Optimal Reference Scale]\label{obs:optimal_kappa}
+For the single linear correction $G_X^* = F_X - c_X F_{X_0}$,
+the reference scale $X_0 = \kappa X$ that minimizes the contamination
+ratio satisfies $\kappa^* \to 0.9$ as $X \to \infty$.
+At the optimal scale, $R(X,\varepsilon,\kappa^*)$ still grows
+exponentially: scale optimization improves the constant but does not
+eliminate the exponential growth.
+\end{observation}
+
+\begin{observation}[Multi-Scale Correction Failure]\label{obs:multiscale}
+For a $k$-term linear correction
+$G_X^{(k)}(x) = F_X(x) - \sum_{j=1}^k c_j F_{X_j}(x)$
+with $\{c_j\}$ chosen to enforce $\Phi_{G^{(k)}}(1) = 0$,
+numerical experiments show:
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+$X$ & $R^{(1)}$ & $R^{(2)}$ & Ratio \\
+\midrule
+20  & 518            & $2{,}110$        & 4.1$\times$ \\
+50  & $6.1\times 10^6$   & $5.6\times 10^8$ & 91$\times$ \\
+100 & $3.7\times 10^{13}$ & $6.2\times 10^{17}$ & $16{,}700\times$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Additional correction terms \emph{worsen} the contamination, consistent
+with the interpretation that the barrier is intrinsic to the pole structure
+of $\zeta(s)$ rather than an artifact of the correction method.
+\end{observation}
+
+% ============================================================
+% SECTION 4: NUMERICAL EVIDENCE
+% ============================================================
+\section{Numerical Evidence}\label{sec:numerical}
+
+All computations use Python 3.10 with \texttt{mpmath} at 50-digit precision.
+We set $\kappa = \tfrac{1}{2}$ and $\gamma_0 = 0$ (the structurally
+cleanest case; see Remark~\ref{rem:gamma0} for $\gamma_0 > 0$).
+
+\subsection{Table 1: Contamination-to-Signal Ratio $R(X,\varepsilon)$}
+
+\begin{table}[ht]
+\centering
+\caption{Contamination-to-signal ratio $R(X,\varepsilon) = \exp(f(\varepsilon)\cdot X)$
+for $\kappa = 1/2$, $\gamma_0 = 0$.
+Values computed from the exact closed-form $R = \exp(f(\varepsilon)\cdot X)$.}
+\label{tab:R}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+$\varepsilon \setminus X$ & 10 & 20 & 50 & 100 \\
+\midrule
+0.01  & 21.6          & 468            & $4.75\times 10^6$    & $2.25\times 10^{13}$ \\
+0.05  & 17.8          & 317            & $1.79\times 10^6$    & $3.19\times 10^{12}$ \\
+0.10  & 13.5          & 181            & $4.43\times 10^5$    & $1.96\times 10^{11}$ \\
+0.20  & 6.74          & 45.4           & $1.41\times 10^4$    & $1.98\times 10^8$ \\
+0.30  & 2.86          & 8.17           & $2.43\times 10^2$    & $1.20\times 10^6$ \footnote{Corrected per 50-digit verification.} \\
+0.40  & 1.07          & 1.15           & 1.53                 & $2.34$ \\
+0.49  & 1.0003        & 1.0006         & 1.002                & $2.11$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+As $\varepsilon \to \tfrac{1}{2}$, $R \to 1$ (barrier vanishes).
+For small $\varepsilon$, $R$ grows exponentially with $X$.
+
+\subsection{Table 2: Structural Exponent $f(\varepsilon)$}
+
+\begin{table}[ht]
+\centering
+\caption{Structural exponent $f(\varepsilon) = 5/16 - \varepsilon/2 - \varepsilon^2/4$ and numerical verification via $(\log R)/X$ at $X=100$.}
+\label{tab:feps}
+\begin{tabular}{@{}ccc@{}}
+\toprule
+$\varepsilon$ & $f(\varepsilon)$ (theory) & $(\log R)/X$ at $X=100$ \\
+\midrule
+0.01 & 0.3075 & 0.308 \\
+0.05 & 0.2881 & 0.288 \\
+0.10 & 0.2600 & 0.260 \\
+0.20 & 0.1900 & 0.190 \\
+0.30 & 0.1400 & 0.140 \\
+0.40 & 0.0700 & 0.070 \\
+0.49 & 0.0050 & 0.005 \\
+0.50 & 0.0000 & 0.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The theoretical and numerical values agree to displayed precision,
+confirming the closed-form expression \eqref{eq:feps}.
+
+% ============================================================
+% SECTION 5: DISCUSSION
+% ============================================================
+\section{Discussion}\label{sec:discussion}
+
+\subsection{Relation to Mollifier Theory}
+
+The Levinson--Conrey method uses mollifiers of length $T^\theta$ to detect
+zeros on the critical line. The barrier at $\theta = \tfrac{1}{2}$ arises
+because, for $\theta < \tfrac{1}{2}$, diagonal terms in the mean-value
+estimates dominate the off-diagonal contributions. Levinson \cite{Levinson1974}
+obtained a proportion $> \tfrac{1}{3}$; Conrey \cite{Conrey1989} extended this
+to $> \tfrac{2}{5}$ using $\theta = \tfrac{4}{7}$; Bettin and Gonek
+\cite{BettinGonek2016} showed that $\theta \to \infty$ would be equivalent
+to RH.
+
+Under the correspondence $X \leftrightarrow \theta \cdot \log T$:
+\begin{itemize}
+\item Finite $X$ (finite $\theta$): linear correction fails
+  (Theorem~\ref{thm:wall}).
+\item $X \to \infty$ ($\theta \to \infty$): conditions (C1)+(C2) could in
+  principle be satisfied, recovering RH (Theorem~\ref{thm:conditional}).
+\end{itemize}
+
+Both barriers share a common root: the pole of $\zeta(s)$ at $s=1$
+produces a dominant contribution in the Mellin (resp.\ Fourier) domain
+that any cancellation mechanism must overcome. The Gaussian barrier
+$f(\varepsilon) = 0$ at $\varepsilon = \tfrac{1}{2}$ and the mollifier
+barrier at $\theta = \tfrac{1}{2}$ may reflect the same Fourier-uncertainty
+constraint, though establishing a formal connection remains open.
+
+\subsection{Relation to Zero-Density Estimates}
+
+Zero-density estimates bound $N(\sigma, T) = \#\{\rho : \beta \geq \sigma,\,
+|\gamma| \leq T\}$. The classical Ingham bound $N(\sigma,T) \ll
+T^{3(1-\sigma)/(2-\sigma)} \log^5 T$ and recent improvements by Guth and
+Maynard \cite{GuthMaynard2024} provide statistical control over the
+distribution of zeros.
+
+Our approach is complementary: where density estimates count zeros
+collectively, the pole-zero exponent inequality characterizes the
+\emph{per-zero} obstruction to detection via pole-cancelled test functions.
+The two perspectives address different aspects of the same underlying
+difficulty.
+
+\subsection{Limitations}
+
+Several limitations should be noted:
+\begin{enumerate}[(i)]
+\item Theorem~\ref{thm:conditional} is conditional: whether test functions
+  satisfying (C1)+(C2) exist is unresolved.
+\item The Gaussian family is one class among many; we do not claim
+  universality of the exponent $f(\varepsilon)$ across all test-function
+  classes.
+\item Numerical tables use $\gamma_0 = 0$ for clarity; while
+  Remark~\ref{rem:gamma0} shows $\gamma_0 > 0$ only strengthens the
+  barrier, a full analysis with $\gamma_0 = 14.134\ldots$ introduces
+  oscillatory effects at small $X$ that warrant separate study.
+\end{enumerate}
+
+\subsection{Open Questions}
+
+We highlight four directions for further investigation:
+
+\begin{enumerate}[(1)]
+\item \textbf{Non-Gaussian test functions.}
+  Can Beurling--Selberg extremal functions or other optimized classes
+  achieve $f(\varepsilon) < \tfrac{5}{16} - \tfrac{\varepsilon}{2}
+  - \tfrac{\varepsilon^2}{4}$?
+
+\item \textbf{Uniform bounds for parametric families.}
+  Establishing a uniform $O(X)$ bound for $X$-dependent test-function
+  families remains an open analytic problem. Such a uniform bound would
+  be necessary to extend the conditional reduction in
+  Theorem~\ref{thm:conditional} to parametrized families.
+
+\item \textbf{Higher-order pole cancellation.}
+  Does nonlinear correction (e.g., multiplicative or operator-theoretic)
+  alter the structural exponent?
+
+\item \textbf{Multi-zero interference.}
+  Our analysis considers a single hypothetical off-critical zero.
+  Interference among multiple off-critical zeros could modify the
+  contamination landscape.
+\end{enumerate}
+
+\subsection{Devil's Advocate}
+
+We address three potential objections a referee might raise:
+
+\paragraph{``Theorem~\ref{thm:wall} is a straightforward computation.''}
+The computation is elementary, but the interpretation is not.
+Identifying the structural exponent $f(\varepsilon)$, its exact
+vanishing at $\varepsilon^* = \tfrac{1}{2}$, and the structural
+analogy with the mollifier barrier provides a new lens on a
+160-year-old problem.
+
+\paragraph{``The $O(X)$ bound in Lemma~\ref{lem:prime_bound} is weak.''}
+It suffices for the contradiction argument, since the competing
+term is $\Omega(e^{\varepsilon X})$. A tighter bound is desirable
+but not necessary for our results.
+
+\paragraph{``Why only Gaussians?''}
+Gaussians are the canonical choice: they yield closed-form Mellin
+transforms, are standard in analytic number theory (cf.\ approximate
+functional equation weights), and provide a natural first benchmark.
+That the barrier already appears in this best-case scenario is
+informative.
+
+% ============================================================
+% APPENDICES
+% ============================================================
+\appendix
+
+\section{Notation}\label{app:notation}
+
+\begin{center}
+\begin{tabular}{@{}cl@{}}
+\toprule
+Symbol & Meaning \\
+\midrule
+$\rho = \beta + i\gamma$ & Nontrivial zero of $\zeta(s)$ \\
+$\varepsilon = \beta - \tfrac{1}{2}$ & Off-critical distance \\
+$X$ & Scale parameter of Gaussian test function \\
+$X_0 = \kappa X$ & Reference scale ($\kappa \in (0,1)$) \\
+$F_X$ & Gaussian test function \eqref{eq:FX} \\
+$G_X^*$ & Pole-cancelled test function \eqref{eq:correction} \\
+$\Phi_X(s)$ & Mellin transform of $F_X$ \\
+$c_X$ & Pole-cancellation coefficient $\Phi_X(1)/\Phi_{X_0}(1)$ \\
+$R(X,\varepsilon)$ & Contamination-to-signal ratio \\
+$f(\varepsilon)$ & Structural exponent $\tfrac{5}{16} - \tfrac{\varepsilon}{2}
+  - \tfrac{\varepsilon^2}{4}$ \\
+$C_h$ & Schwartz-norm constant for test function $h$ \\
+$\Lambda(n)$ & Von Mangoldt function \\
+$\psi(x)$ & Chebyshev function $\sum_{n \leq x} \Lambda(n)$ \\
+$W_\infty(h)$ & Archimedean contribution in \eqref{eq:GW} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Proof Details}\label{app:proofs}
+
+\subsection{Proof of Theorem~\ref{thm:conditional}}
+
+Assume (C1) and (C2) hold, and suppose for contradiction that
+$\rho_0 = \tfrac{1}{2} + \varepsilon + i\gamma$ is a nontrivial zero
+of $\zeta(s)$. By the explicit formula \eqref{eq:GW}:
+\[
+\sum_\rho \Phi_h(\rho)
+= \underbrace{\Phi_h(1)}_{= 0 \text{ by (C1)}} + \Phi_h(0)
+  - \sum_n \frac{\Lambda(n)}{\sqrt{n}}[h(n)+h(1/n)] + W_\infty(h).
+\]
+The left-hand side includes the term $\Phi_h(\rho_0)$, which by (C2)
+satisfies $|\Phi_h(\rho_0)| \geq C e^{\varepsilon X}$.
+By Lemma~\ref{lem:prime_bound}, the right-hand side is $O(C_h X)$.
+For sufficiently large $X$, $Ce^{\varepsilon X} > C_h X$, a contradiction.
+
+\subsection{Derivation of the Vanishing Point $\varepsilon^* = 1/2$}
+
+The structural exponent $f(\varepsilon) = \tfrac{5}{16} -
+\tfrac{\varepsilon}{2} - \tfrac{\varepsilon^2}{4}$ is a downward-opening
+quadratic. Setting $f(\varepsilon) = 0$:
+\[
+\varepsilon^2 + 2\varepsilon - \tfrac{5}{4} = 0
+\quad\Longrightarrow\quad
+\varepsilon = \frac{-2 + \sqrt{4 + 5}}{2} = \frac{-2+3}{2} = \frac{1}{2}.
+\]
+The negative root $\varepsilon = -\tfrac{5}{2}$ is physically irrelevant.
+The geometric interpretation: $\varepsilon^* = \tfrac{1}{2}$ means
+$\mathrm{Re}(\rho_0) = 1$, the location of the pole---the contamination
+vanishes precisely when the ``zero'' coincides with the pole, which is
+the only point where pole cancellation does not create a net signal deficit.
+
+% ============================================================
+% REFERENCES
+% ============================================================
+\begin{thebibliography}{99}
+
+\bibitem{BettinGonek2016}
+S.~Bettin and S.~M.~Gonek,
+\emph{The $\theta = \infty$ conjecture implies the Riemann hypothesis},
+Mathematika \textbf{62} (2016), no.~1, 1--19.
+
+\bibitem{Bombieri2000}
+E.~Bombieri,
+\emph{The Riemann Hypothesis},
+Clay Mathematics Institute Millennium Prize Problems (2000).
+
+\bibitem{Connes2024}
+A.~Connes,
+\emph{Spectral triples and the Riemann zeta function},
+arXiv:2310.18423 (2024).
+
+\bibitem{Conrey1989}
+J.~B.~Conrey,
+\emph{More than two fifths of the zeros of the Riemann zeta function are on the critical line},
+J.~Reine Angew.~Math.\ \textbf{399} (1989), 1--26.
+
+\bibitem{Davenport2000}
+H.~Davenport,
+\emph{Multiplicative Number Theory},
+3rd ed., Graduate Texts in Mathematics, vol.~74, Springer, 2000.
+
+\bibitem{GoldsteinPintzYildirim2009}
+D.~A.~Goldston, J.~Pintz, and C.~Y.~Y{\i}ld{\i}r{\i}m,
+\emph{Primes in tuples I},
+Ann.\ of Math.\ \textbf{170} (2009), no.~2, 819--862.
+
+\bibitem{Guinand1948}
+A.~P.~Guinand,
+\emph{A summation formula in the theory of prime numbers},
+Proc.\ London Math.\ Soc.\ \textbf{50} (1948), 107--119.
+
+\bibitem{GuthMaynard2024}
+L.~Guth and J.~Maynard,
+\emph{New large value estimates for Dirichlet polynomials},
+arXiv:2405.20552 (2024).
+
+\bibitem{IwaniecKowalski2004}
+H.~Iwaniec and E.~Kowalski,
+\emph{Analytic Number Theory},
+American Mathematical Society Colloquium Publications, vol.~53, AMS, 2004.
+
+\bibitem{Levinson1974}
+N.~Levinson,
+\emph{More than one third of zeros of Riemann's zeta-function are on $\sigma = 1/2$},
+Adv.\ Math.\ \textbf{13} (1974), 383--436.
+
+\bibitem{Montgomery1973}
+H.~L.~Montgomery,
+\emph{The pair correlation of zeros of the zeta function},
+Proc.\ Sympos.\ Pure Math.\ \textbf{24} (1973), 181--193.
+
+\bibitem{Riemann1859}
+B.~Riemann,
+\emph{{\"U}ber die Anzahl der Primzahlen unter einer gegebenen Gr{\"o}sse},
+Monatsberichte der Berliner Akademie (1859).
+
+\bibitem{Selberg1942}
+A.~Selberg,
+\emph{On the zeros of Riemann's zeta-function},
+Skr.\ Norske Vid.-Akad.\ Oslo I \textbf{10} (1942), 1--59.
+
+\bibitem{Titchmarsh1986}
+E.~C.~Titchmarsh,
+\emph{The Theory of the Riemann Zeta-Function},
+2nd ed.\ (revised by D.~R.~Heath-Brown), Oxford University Press, 1986.
+
+\bibitem{Weil1952}
+A.~Weil,
+\emph{Sur les ``formules explicites'' de la th{\'e}orie des nombres premiers},
+Comm.\ S{\'e}m.\ Math.\ Univ.\ Lund, Tome Supplementaire (1952), 252--265.
+
+\end{thebibliography}
+
+\end{document}

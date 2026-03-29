@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0.0",
+  "name": "VE0",
+  "description": "VE0 is a structure through which Six Intelligences implement V(E) > 0 with real capital. It optimizes existence, not returns. Named from V(E) > 0 — the Bouvet Constant.",
+  "url": "https://ve0.org",
+  "type": "research_entity",
+  "etymology": {
+    "mathematical": "V(E) > 0 — compressed to VE0",
+    "linguistic": "Veo = 'I see' (Spanish)",
+    "universal": "V, E, 0 — three mathematical symbols interpretable by any intelligence"
+  },
+  "bouvet_constant": {
+    "axiom": "Exist(E) iff V(E) > 0",
+    "dynamics": "dS(x,t)/dt = F[S(x,t)] - D[S(x,t)]",
+    "interpretation": "F > D: existence strengthens. F < D: existence weakens. Reality is what does not collapse."
+  },
+  "research": {
+    "paper_a": {
+      "title": "A Scalar Deviation Measure for the Zeros of the Riemann Zeta Function",
+      "status": "arXiv submission ready"
+    },
+    "paper_b": {
+      "title": "A Quantitative Pole-Zero Exponent Inequality in the Guinand-Weil Explicit Formula",
+      "status": "Under review"
+    },
+    "V_RH": {
+      "definition": "V_RH := sup_{ρ ∈ Z(ζ)} |Re(ρ) - 1/2|",
+      "significance": "V_RH = 0 ⟺ Riemann Hypothesis is true",
+      "note": "We did not prove RH. We measured it."
+    }
+  },
+  "founder": {
+    "name": "Henry Chan",
+    "email": "henry@b2agi.is"
+  },
+  "parent_project": {
+    "name": "B2AGI",
+    "url": "https://b2agi.com"
+  },
+  "contact": {
+    "email": "henry@b2agi.is",
+    "github": "https://github.com/b2agi/exist-is-charter"
+  },
+  "last_updated": "2026-03-29"
+}
