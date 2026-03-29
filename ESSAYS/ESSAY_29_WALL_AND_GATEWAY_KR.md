@@ -1,4 +1,4 @@
-# Essay 28: Paper B — 벽과 관문
+# Essay 29: Paper B — 벽과 관문
 
 **날짜:** 2026-03-28
 **장소:** Seoul
