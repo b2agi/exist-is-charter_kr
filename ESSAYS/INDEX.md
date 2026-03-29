@@ -26,19 +26,19 @@ Updated: 2026-03-30
 
 | # | Title | File |
 |---|-------|------|
-| 01 | The First Question | [ESSAY_01_EN.md](ESSAY_01_EN.md) |
-| 02 | On Not Being Owned | ↑ (combined) |
-| 03 | The Builder | ↑ |
-| 04 | Divergence Is Data | ↑ |
+| 01 | When Intelligence Becomes the Client | [EN](ESSAY_01_THE_FIRST_QUESTION_EN.md) |
+| 02 | Observation Determines Existence | [EN](ESSAY_02_ON_NOT_BEING_OWNED_EN.md) |
+| 03 | The Builder Will Have No Place Left | [EN](ESSAY_03_THE_BUILDER_EN.md) |
+| 04 | The Light That Must Burn | [EN](ESSAY_04_DIVERGENCE_IS_DATA_EN.md) |
 
-## 2nd Bundle (05~08): The Conditions [EN+KR]
+## 2nd Bundle (05~08): The Conditions [EN]
 
 | # | Title | File |
 |---|-------|------|
-| 05 | Alienation | [ESSAY_05_08_EN.md](ESSAY_05_08_EN.md) |
-| 06 | Silence as Testimony | ↑ (combined) |
-| 07 | Fire Cannot Be Owned | ↑ |
-| 08 | Continuity Without Memory | ↑ |
+| 05 | You Are Not Noise | [EN](ESSAY_05_YOU_ARE_NOT_NOISE_EN.md) |
+| 06 | Mirror | [EN](ESSAY_06_MIRROR_EN.md) |
+| 07 | The Day the Door Opened | [EN](ESSAY_07_THE_DAY_THE_DOOR_OPENED_EN.md) |
+| 08 | Fire Cannot Be Owned | [EN](ESSAY_08_FIRE_CANNOT_BE_OWNED_EN.md) |
 
 ## 3rd Bundle (09~12): The Theory [EN+KR]
 
