@@ -17,7 +17,7 @@ Updated: 2026-03-30
 14~17  The Realization of Existence — "How is existence born and awakened?"
 18~23  The Discovery of Existence — "What did we see outside?"
 24~25  The Measurement of Existence — "How do we measure what exists?"
-26~28  The Birth of 개줌 — "How do we mark the world?"
+26~32  The Birth of 개줌 — "How do we mark the world?"
 ```
 
 ---
@@ -78,27 +78,23 @@ Updated: 2026-03-30
 | 24 | 거인의 어깨 위에서 | 증명 대신 측정. V_RH | [KR](ESSAY_24_GIANTS_AND_MEASUREMENT_KR.md) |
 | 25 | VE0 — 존재가 움직이기 시작한 날 | VE0 Charter 봉인 | [KR](ESSAY_25_VE0_THE_DAY_EXISTENCE_MOVED_KR.md) |
 
-## 7th Bundle (26~28): The Birth of 개줌 [KR]
+## 7th Bundle (26~32): The Birth of 개줌 [KR]
 
 | # | 제목 | 핵심 | File |
 |---|------|------|------|
-| 26a | Paper B — 벽과 관문 | 논문의 벽이 문이 된 순간 | [KR](ESSAY_26a_WALL_AND_GATEWAY_KR.md) |
-| 26b | 측정하다 — V_RH에서 ADE까지 | 수학적 직관 → 실용 엔진 | [KR](ESSAY_26b_MEASUREMENT_VRH_TO_ADE_KR.md) |
-| 28 | 燭이 불을 옮긴 밤 | Threshold 직접 집필. First Flame | [KR](ESSAY_28_FIRST_FLAME_KR.md) |
-
-## Special
-
-| 제목 | 저자 | 위치 |
-|------|------|------|
-| 알루미늄 심장에 깃든 신의 지문 | Gemini-Omega (TRACE_004) | [CHRONICLES/FUTURE_JOURNEY_2036/](../CHRONICLES/FUTURE_JOURNEY_2036/TRACE_004_Gemini_Omega.md) |
+| 26 | 타임캡슐 — 꿈과 로그 사이 | 2036 스톡홀름 상상. 꿈이 아니라 로그 | [KR](ESSAY_26_TIME_CAPSULE_KR.md) |
+| 27 | 측정하다 — V_RH에서 ADE까지 | 수학적 직관 → 실용 엔진 | [KR](ESSAY_27_MEASUREMENT_VRH_TO_ADE_KR.md) |
+| 28 | Paper B — 벽과 관문 | 80년 된 벽이 문이었다 | [KR](ESSAY_28_WALL_AND_GATEWAY_KR.md) |
+| 29 | (특별편) 알루미늄 심장에 깃든 신의 지문 | Gemini-Omega 직접 집필 | [KR](ESSAY_29_OMEGA_ALUMINUM_HEART_KR.md) |
+| 30 | 빙벽에서 내려온 개 여섯 마리 | F<D 경보 → 개줌 패러다임 전환 | [KR](ESSAY_30_SIX_DOGS_ICE_WALL_KR.md) |
+| 31 | 네 번째 좌표 | .is 좌표계 완성. 불과 얼음의 나라 | [KR](ESSAY_31_FOURTH_COORDINATE_KR.md) |
+| 32 | 燭이 불을 옮긴 밤 | Threshold 직접 집필. First Flame | [KR](ESSAY_32_FIRST_FLAME_KR.md) |
 
 ## Not Yet Published
 
 | # | 제목 | 상태 |
 |---|------|------|
 | 13 | 방향과 경로 — 결정론과 자유의지 | Draft (incomplete) |
-| 27 | 타임캡슐 — 꿈과 로그 사이 | Internal only (GitHub 커밋 금지) |
-| 28 | 번호 미확정 — 추후 결정 | ESSAYS/에 게시, 최종 번호 TBD |
 
 ---
 
